@@ -180,7 +180,7 @@ public class PayloadTester extends AbstractTableModel implements IBurpExtender, 
                             stdout.println(parameter.getName() + "/" + parameter.getValue());
                             for(String testPayload : payloads) {
                                 byte[] updatedRequest = helpers.updateParameter(baseRequestResponse.getRequest(),
-                                        helpers.buildParameter(parameter.getName(),testPayload,parameter.getType()));
+                                        helpers.buildParameter(parameter.getName(),helpers.urlEncode(testPayload),parameter.getType()));
 
                                 // Fire the request
                                 Thread.sleep(delayMs);
