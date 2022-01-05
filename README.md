@@ -2,7 +2,7 @@
 An automatic repeater to test each fields with payloads
 
 # Downloads
-Please check on [Releases](https://github.com/hhh/releases) page.
+Please check on [Releases](https://github.com/sebastian93921/burp-payload-tester/releases) page.
 
 # How it works
 First place any payloads into Options page
