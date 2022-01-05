@@ -1,5 +1,5 @@
 # Burp Payload Tester Extension
-An automatic repeater to test each fields with payloads
+An automatic test to repeat the same method with different json or url fields one by one with wordlist.
 
 ### Supported format
 - JSON
