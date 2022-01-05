@@ -330,7 +330,7 @@ public class PayloadTester extends AbstractTableModel implements IBurpExtender, 
             case 1:
                 return "URL";
             case 2:
-                return "Request Payload";
+                return "Modified Field";
             case 3:
                 return "Status";
             case 4:
@@ -367,7 +367,7 @@ public class PayloadTester extends AbstractTableModel implements IBurpExtender, 
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = log.size();
-                LogEntry logEntry = new LogEntry(helpers.analyzeRequest(responses[0]).getUrl(), "scanning", "", -1, -1, responses[0]);
+                LogEntry logEntry = new LogEntry(helpers.analyzeRequest(responses[0]).getUrl(), "Start scanning...", "", -1, -1, responses[0]);
                 log.add(logEntry);
                 fireTableRowsInserted(row, row);
 
