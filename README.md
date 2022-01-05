@@ -1,6 +1,10 @@
 # Burp Payload Tester Extension
 An automatic repeater to test each fields with payloads
 
+### Supported format
+- JSON
+- UrlEncoded
+
 # Downloads
 Please check on [Releases](https://github.com/sebastian93921/burp-payload-tester/releases) page.
 
