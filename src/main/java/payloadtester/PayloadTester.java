@@ -45,7 +45,7 @@ public class PayloadTester extends AbstractTableModel implements IBurpExtender, 
         this.stdout = new PrintWriter(callbacks.getStdout(), true);
         this.helpers = callbacks.getHelpers();
         this.stdout.println("Sebastian - PayloadTester?");
-        this.stdout.println("Please place proper payload into test strings");
+        this.stdout.println("Please place proper payloads in Options page");
         callbacks.setExtensionName("PayloadTester");
         callbacks.registerScannerCheck(this);
         callbacks.registerContextMenuFactory(this);
