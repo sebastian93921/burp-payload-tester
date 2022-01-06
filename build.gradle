@@ -9,7 +9,7 @@ dependencies {
 }
 
 sourceCompatibility = 1.11
-version = '0.1'
+version = '1.0'
 
 task packjar(type: Jar) {
     archiveClassifier = 'packed'
