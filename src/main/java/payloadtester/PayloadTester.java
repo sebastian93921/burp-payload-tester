@@ -14,6 +14,7 @@ import javax.swing.table.TableModel;
 import burp.*;
 import com.google.gson.*;
 
+import static burp.IParameter.PARAM_BODY;
 import static burp.IParameter.PARAM_URL;
 import static burp.IRequestInfo.CONTENT_TYPE_NONE;
 import static burp.IRequestInfo.CONTENT_TYPE_URL_ENCODED;
@@ -176,7 +177,7 @@ public class PayloadTester extends AbstractTableModel implements IBurpExtender, 
                     loopAllFieldsForRequest(gson, baseRequestResponse, headers, url, je, je, payloads, delayMs);
                 }else if(content_type == CONTENT_TYPE_URL_ENCODED || content_type == CONTENT_TYPE_NONE) {
                     for(IParameter parameter : analyzeRequest.getParameters()){
-                        if(parameter.getType() == PARAM_URL) {
+                        if(parameter.getType() == PARAM_URL || parameter.getType() == PARAM_BODY) {
                             stdout.println(parameter.getName() + "/" + parameter.getValue());
                             for(String testPayload : payloads) {
                                 byte[] updatedRequest = helpers.updateParameter(baseRequestResponse.getRequest(),
@@ -193,6 +194,8 @@ public class PayloadTester extends AbstractTableModel implements IBurpExtender, 
                                     fireTableDataChanged(); // Notify data change
                                 }
                             }
+                        }else{
+                            stdout.println("Request not supported, url: "+url+" , method: "+method+" , content type: "+content_type+", parameter type: "+parameter.getType());
                         }
                     }
                 }else{
@@ -300,13 +303,26 @@ public class PayloadTester extends AbstractTableModel implements IBurpExtender, 
     }
 
     @Override
-    public String getValueAt(int rowIndex, int columnIndex) {
+    public Class getColumnClass(int column) {
+        switch (column) {
+            case 0: // Row Index
+            case 4: // Response size
+                return Integer.class;
+            case 5: // Response time
+                return Long.class;
+            default:
+                return String.class;
+        }
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
         LogEntry logEntry = log.get(rowIndex);
 
         switch (columnIndex)
         {
             case 0:
-                return ""+rowIndex;
+                return rowIndex;
             case 1:
                 return logEntry.url.toString();
             case 2:
@@ -412,6 +428,7 @@ public class PayloadTester extends AbstractTableModel implements IBurpExtender, 
         public Table(TableModel tableModel)
         {
             super(tableModel);
+            setAutoCreateRowSorter(true);
         }
 
         @Override
