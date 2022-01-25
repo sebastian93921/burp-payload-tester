@@ -21,58 +21,6 @@ In `Tester` section you will now see the extension tested on every single field 
 Right click `Clear history` to cleanup the table
 ![image](https://user-images.githubusercontent.com/4918219/148172650-f66ebf4f-5a1f-4365-916c-7e5d10e9575e.png)
 
-# What is the different with Intruder?
-Use a test request as an example:
-Request body:
-```
-{
- "field_a":"testa",
- "field_b":"testb",
- "field_c":"testc"
-}
-```
-
-If you want to test all of these fields in intruder, you have to: 
-1. Create 3 intruder request or,
-2. Create 1 intruder request with following:
-```
-{
- "field_a":"%wordlist%",
- "field_b":"%wordlist%",
- "field_c":"%wordlist%"
-}
-```
-
-If the server side has a flag have to check whether it's changed (eg. field_a must not be changed), your intruder request will all fails because all fields has modified.
-
-If you using this extension, it will modify the field one by one, which means:
-First it will test field_a
-```
-{
- "field_a":"%wordlist%",
- "field_b":"testb",
- "field_c":"testc"
-}
-```
-Second it will test field_b
-```
-{
- "field_a":"testa",
- "field_b":"%wordlist%",
- "field_c":"testc"
-}
-```
-Third it test field_c
-```
-{
- "field_a":"testa",
- "field_b":"testb",
- "field_c":"%wordlist%"
-}
-```
-
-You can see if the response changes when anyone of the field has modified
-
 # Loading Instructions
 1. Launch BurpSuite
 2. Go to the Extender tab and open the Extensions tab
