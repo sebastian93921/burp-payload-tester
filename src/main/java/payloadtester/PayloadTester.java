@@ -434,8 +434,11 @@ public class PayloadTester extends AbstractTableModel implements IBurpExtender, 
         @Override
         public void changeSelection(int row, int col, boolean toggle, boolean extend)
         {
+            // Select the row by row id
+            int currentRow = (int)this.getValueAt(row, 0);
+
             // show the log entry for the selected row
-            LogEntry logEntry = log.get(row);
+            LogEntry logEntry = log.get(currentRow);
             requestViewer.setMessage(logEntry.requestResponse.getRequest(), true);
             responseViewer.setMessage(logEntry.requestResponse.getResponse(), false);
             currentlyDisplayedItem = logEntry.requestResponse;
